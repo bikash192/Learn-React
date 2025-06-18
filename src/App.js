@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Login from "./Login";
+import Home from "./Home"
+import { Routes, Route } from 'react-router-dom';
 
-const App = () => {
-  return (
-    <div className="container text-center">
-      <h1> Welcome to MERN projects!</h1>
-      
-    </div>
+function App(){
+  return(
+    <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/Login" element={<Login/>} />
+      </Routes>
+   
   )
 }
 

@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="container">
         <Link to="/">Home</Link> 
-        <Link to="/Login">Login</Link>
+        <Link to="/LoginForm">Login</Link>
       
     </div>
   )

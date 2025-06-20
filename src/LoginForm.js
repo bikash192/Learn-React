@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const LoginForm = () => {
   const navigate=useNavigate();
@@ -31,23 +33,39 @@ const LoginForm = () => {
         setErrors(newErrors);
         return isValid;
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit= async(e)=>{
       e.preventDefault();
       if(validate()){
-        if(formData.username==='admin'&&formData.password==='admin'){
-          setMessage('Valid Credentials');
-          navigate ('/Dashboard');
+        // if(formData.username==='admin'&&formData.password==='admin'){
+        //   setMessage('Valid Credentials');
+        //   navigate ('/Dashboard');
 
+        // }
+        // else{
+        //   setMessage('Invalid Credentials');
+        // }
+        const body={
+          username:formData.username,
+          password:formData.password
+        };
+        const configuration={
+          withCredentials:true
         }
-        else{
-          setMessage('Invalid Credentials');
+        try{
+            const response=await axios.post('http://localhost:5000/auth/login',body,configuration)
+          console.log(response);
         }
+        catch(error){
+            setErrors({messagae:"Login failed,please check your credentials"});
+        }
+        
       }
     }
   return (
     <div className="container text-center">
       {message&&(message)}
       <h1>Login Page</h1>
+      {errors}
       <form onSubmit={handleSubmit}>
         <>
         <label>Username:</label>
